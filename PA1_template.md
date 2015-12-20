@@ -44,7 +44,7 @@ Compute the mean and median values of the daily step count and create the histog
 #compute the mean and median values
 meanDailySteps = mean(dailySteps$x)
 medianDailySteps = median(dailySteps$x)
-hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken",xlab="daily steps",xlim=c(0,25000))
+hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Average Daily Steps",xlab="daily steps",xlim=c(0,25000))
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
@@ -64,7 +64,7 @@ Create a times series plot of the data.
 ```r
 #process the data slightly before processing/creating the histogram; plot the data; and add some annotations
 intSteps <- aggregate(inData$steps,list(inData$interval),FUN=mean,na.rm=TRUE)
-plot(intSteps,type='l',col='dark red',xlab='5-minute interval',ylab='average steps taken',xlim=c(0,2400), ylim=c(-15,250), main="Number of Steps Taken by Time of Day", lwd=c(2), sub="(time of day is above x-axis)")
+plot(intSteps,type='l',col='dark red',xlab='5-minute interval',ylab='average steps taken',xlim=c(0,2400), ylim=c(-15,250), main="Average Steps by Time of Day", lwd=c(2), sub="(time of day is above x-axis)")
 text(0,-12,"00:00")
 text(600,-12,"06:00")
 text(1200,-12,"12:00")
@@ -125,7 +125,7 @@ for (i in 1:numNA){
 dailySteps <- aggregate(inData$steps,list(inData$date),FUN=sum)
 meanDailySteps = mean(dailySteps$x)
 medianDailySteps = median(dailySteps$x)
-hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken AFTER Missing Values Imputed",xlab="daily steps",xlim=c(0,25000))
+hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Average Daily Steps AFTER Missing Values Imputed",xlab="daily steps",xlim=c(0,25000))
 ```
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
@@ -164,7 +164,7 @@ weekEndIntSteps <- aggregate(weekEndSteps,list(weekEndInts),FUN=mean,na.rm=TRUE)
 
 
 ```r
-#plot the data and add annotation as needed
+#plot the data and add annotations as needed
 nf <- layout(matrix(c(1,2),2,1))
 par(mar=c(5,5,1,0))
 plot(weekDayIntSteps$Group.1,weekDayIntSteps$x,type='l',col='dark red',xlab='5-minute interval',ylab='average steps taken',xlim=c(0,2400), ylim=c(-30,250), lwd=c(2))
