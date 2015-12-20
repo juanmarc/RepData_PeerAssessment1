@@ -16,6 +16,7 @@ Read in the data from the file 'activity.csv'.
 
 
 ```r
+#read the data in directly from a .csv file
 inData <- read.csv("activity.csv")
 ```
 
@@ -29,8 +30,9 @@ Split the step data into subsets by the date and sum the steps taken each day.
 
 
 ```r
-library(ggplot2)
+#we will need to process the data slightly to make the computations easier
 dailySteps <- aggregate(inData$steps,list(inData$date),FUN=sum,na.rm=TRUE)
+library(ggplot2)
 ```
 
 #### Calcluate and report the mean and median of the total number of steps taken per day.
@@ -39,6 +41,7 @@ Compute the mean and median values of the daily step count and create the histog
 
 
 ```r
+#compute the mean and median values
 meanDailySteps = mean(dailySteps$x)
 medianDailySteps = median(dailySteps$x)
 hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken",xlab="daily steps",xlim=c(0,25000))
@@ -59,6 +62,7 @@ Create a times series plot of the data.
 
 
 ```r
+#process the data slightly before processing/creating the histogram; plot the data; and add some annotations
 intSteps <- aggregate(inData$steps,list(inData$interval),FUN=mean,na.rm=TRUE)
 plot(intSteps,type='l',col='dark red',xlab='5-minute interval',ylab='average steps taken',xlim=c(0,2400), ylim=c(-15,250), main="Number of Steps Taken by Time of Day", lwd=c(2), sub="(time of day is above x-axis)")
 text(0,-12,"00:00")
@@ -76,6 +80,7 @@ Determine the interval which has the maximum number of steps (on average) over a
 
 
 ```r
+#compute the 5 minute interval with the max steps, on average
 maxInterval <- intSteps$Group.1[[which.max(intSteps$x)]]
 ```
 
@@ -90,6 +95,7 @@ Determine the number of missing entries (number of 5-minutes intervals which hav
 
 
 ```r
+#count the number of step entries that are NA
 missingSteps <- sum(is.na(inData$steps))
 ```
 
@@ -102,6 +108,7 @@ For this case, we will use the mean over the 5-minute interval to fill data hole
 
 
 ```r
+#impute the data by filling holes with the average number of steps in that 5-minute period
 naValsPos <- which(is.na(inData$steps))
 numNA <- length(naValsPos)
 for (i in 1:numNA){
@@ -114,10 +121,11 @@ for (i in 1:numNA){
 
 
 ```r
+#process the data slightly; compute mean and median; plot the data; and add some annotations
 dailySteps <- aggregate(inData$steps,list(inData$date),FUN=sum)
 meanDailySteps = mean(dailySteps$x)
 medianDailySteps = median(dailySteps$x)
-hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken",xlab="daily steps",xlim=c(0,25000))
+hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken AFTER Missing Values Imputed",xlab="daily steps",xlim=c(0,25000))
 ```
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
@@ -140,10 +148,12 @@ By replacing missing values with the average report for that interval, we are ad
 
 
 ```r
+#process the data to extract the weekend step data
 weekDaySteps <- inData$steps[weekdays(as.POSIXlt(inData$date))!="Sunday" && weekdays(as.POSIXlt(inData$date))!="Saturday"]
 weekDayInts <- inData$interval[weekdays(as.POSIXlt(inData$date))!="Sunday" && weekdays(as.POSIXlt(inData$date))!="Saturday"]
 weekDayIntSteps <- aggregate(weekDaySteps,list(weekDayInts),FUN=mean,na.rm=TRUE)
 
+#process the data to extract the weekday step data
 weekEndSteps <- inData$steps[weekdays(as.POSIXlt(inData$date))=="Sunday" | weekdays(as.POSIXlt(inData$date))=="Saturday"]
 weekEndInts <- inData$interval[weekdays(as.POSIXlt(inData$date))=="Sunday" | weekdays(as.POSIXlt(inData$date))=="Saturday"]
 weekEndIntSteps <- aggregate(weekEndSteps,list(weekEndInts),FUN=mean,na.rm=TRUE)
@@ -154,6 +164,7 @@ weekEndIntSteps <- aggregate(weekEndSteps,list(weekEndInts),FUN=mean,na.rm=TRUE)
 
 
 ```r
+#plot the data and add annotation as needed
 nf <- layout(matrix(c(1,2),2,1))
 par(mar=c(5,5,1,0))
 plot(weekDayIntSteps$Group.1,weekDayIntSteps$x,type='l',col='dark red',xlab='5-minute interval',ylab='average steps taken',xlim=c(0,2400), ylim=c(-30,250), lwd=c(2))
