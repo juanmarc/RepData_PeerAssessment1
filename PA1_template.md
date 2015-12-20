@@ -46,8 +46,8 @@ hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps 
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
-- #####Mean number of steps taken each day = 9354.23
-- #####Median number of steps taken each day = 10395
+- Mean number of steps taken each day = 9354.23
+- Median number of steps taken each day = 10395
 
 ## What is the average daily activity pattern?
 
@@ -79,7 +79,7 @@ Determine the interval which has the maximum number of steps (on average) over a
 maxInterval <- intSteps$Group.1[[which.max(intSteps$x)]]
 ```
 
-- #####Time of maximum steps taken in a five minute interval (on average) = 835
+- Time of maximum steps taken in a five minute interval (on average) = 835
 
 
 ## Imputing missing values
@@ -94,7 +94,7 @@ missingSteps <- sum(is.na(inData$steps))
 ```
 
 
-- #####Number of missing entries = 2304
+- Number of missing entries = 2304
 
 #### Devise a strategy for filling in missing values in the dataset. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
@@ -122,8 +122,8 @@ hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps 
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
 
-- #####Mean number of steps taken each day = 10766.2
-- #####Median number of steps taken each day = 10766.2
+- Mean number of steps taken each day = 10766.2
+- Median number of steps taken each day = 10766.2
 
 
 #### Do these values differ from the estimates from the first part of the assignment? 

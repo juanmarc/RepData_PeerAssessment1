@@ -43,8 +43,8 @@ medianDailySteps = median(dailySteps$x)
 hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken",xlab="daily steps",xlim=c(0,25000))
 ```
 
-- #####Mean number of steps taken each day = `r format(meanDailySteps, digits=6)`
-- #####Median number of steps taken each day = `r format(medianDailySteps, digits=6)`
+- Mean number of steps taken each day = `r format(meanDailySteps, digits=6)`
+- Median number of steps taken each day = `r format(medianDailySteps, digits=6)`
 
 ## What is the average daily activity pattern?
 
@@ -72,7 +72,7 @@ Determine the interval which has the maximum number of steps (on average) over a
 maxInterval <- intSteps$Group.1[[which.max(intSteps$x)]]
 ```
 
-- #####Time of maximum steps taken in a five minute interval (on average) = `r maxInterval`
+- Time of maximum steps taken in a five minute interval (on average) = `r maxInterval`
 
 
 ## Imputing missing values
@@ -86,7 +86,7 @@ missingSteps <- sum(is.na(inData$steps))
 ```
 
 
-- #####Number of missing entries = `r missingSteps`
+- Number of missing entries = `r missingSteps`
 
 #### Devise a strategy for filling in missing values in the dataset. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
@@ -110,8 +110,8 @@ medianDailySteps = median(dailySteps$x)
 hist(dailySteps$x,breaks=50,freq=TRUE,col="gray",main="Histogram of Daily Steps Taken",xlab="daily steps",xlim=c(0,25000))
 ```
 
-- #####Mean number of steps taken each day = `r format(meanDailySteps,digits=6)`
-- #####Median number of steps taken each day = `r format(medianDailySteps,digits=6)`
+- Mean number of steps taken each day = `r format(meanDailySteps,digits=6)`
+- Median number of steps taken each day = `r format(medianDailySteps,digits=6)`
 
 
 #### Do these values differ from the estimates from the first part of the assignment? 
